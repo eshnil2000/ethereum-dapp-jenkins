@@ -1,0 +1,67 @@
+<!doctype html>
+        <html>
+<head>
+    <title>MyNode</title>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
+    <script type="text/javascript">
+        
+        var myAccounts;
+        var childElement, appendChildElement, parentElement;
+
+        web3 = new Web3(new Web3.providers.HttpProvider("http://nik.chainapp.live:7852"));
+
+        const getMyAccounts = async () => {
+            try {
+                myAccounts = await web3.eth.getAccounts();
+                //console.log(myAccounts);
+                return myAccounts;
+
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        myAccounts=getMyAccounts();
+
+
+        function printAllAccounts(){
+            parentElement = document.getElementById('accounts');
+
+            for (var k in myAccounts){
+                    if (typeof myAccounts[k] !== 'function') {
+                         console.log("Key is " + k + ", value is" + myAccounts[k]);
+
+                            childElement = document.createElement('div');
+                          appendChildElement = parentElement.appendChild(childElement);
+                          appendChildElement.innerHTML = k.toString()+ ":"+myAccounts[k].toString();
+
+                    }
+                }
+        }
+
+
+        function getBalance() {
+
+            web3.eth.getBalance(myAccounts[0], function(error, balance) {
+                //console.log("add is",add);
+                document.getElementById("myBalance").innerText = web3.utils.fromWei(balance, "ether");                
+            });
+        }
+    //python -m http.server 8081//
+    </script>
+
+
+</head>
+<body>
+<h1>This is my balance</h1> <span id="myBalance"></span> Ether
+<br>
+<br>
+<button onclick="getBalance()">Update my balance</button>
+<br>
+<br>
+<button onclick="printAllAccounts()">List all accounts</button>
+<div id="accounts">                
+  <!-- empty -->
+</div>
+</body>
+</html>
