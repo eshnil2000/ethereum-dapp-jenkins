@@ -1,67 +1,119 @@
 <!doctype html>
-        <html>
-<head>
-    <title>MyNode</title>
+<html>
+    <head>
+    <!--Include the stylesheet to style HTML page-->
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
+    <!--Include the web3 library to use Ethereum web3 APIs-->
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.js"></script>
-    <script type="text/javascript">
+    <!--Include the file that holds javascript functions to interact with the blockchain, call web3 functions, interact with Smart Contract -->
+    <script type="text/javascript" src="main.js"></script>
+
+    <title>MyDappsUniNode</title>
+
+    </head>
+
+    <body>
+        <div id="headerlogo" class="header">
+            <img src="logo.png" alt="logo" />
+            <h1>My DappsUni Smart Contract Dashboard</h1>
+        </div>
+        <hr>
+        <br>
+        <!--Input your Ethereum Node IP address or domain name-->
         
-        var myAccounts;
-        var childElement, appendChildElement, parentElement;
+            <h3 id='instructions'>Before you begin: Set your Ethereum Node!!</h3>
+            <div id='instructions'>
+            <pre><code>
+                //In file main.js, change myDappsUniEthereumNode to your domain
+                var myDappsUniEthereumNode= "nik.chainapp.live:7852";
+            </code></pre>
+            </div>
+        </div>
+        <br>
+        <!--Input Smart Contract address in Hex-->
+        <div>
+            <h3>Find Smart Contract</h3>
+            <form id="queryContractForm">
+                <br> Enter Contract address:
+                <br>
+                <input type="text" id="queryContract" name="queryContract" placeholder="ex: 0x1f8658dFb19a59d719951C00155fa894a78051e8134140f6">
+                 <br>
+                <input type="button" class="button" value="Submit Contract Address" onclick="getcontract()">
+            </form>
 
-        web3 = new Web3(new Web3.providers.HttpProvider("http://nik.chainapp.live:7852"));
+          <div id="currentContract">                
+          <!-- empty -->
+        </div>
+        </div>
 
-        const getMyAccounts = async () => {
-            try {
-                myAccounts = await web3.eth.getAccounts();
-                //console.log(myAccounts);
-                return myAccounts;
+        <br>
 
-            } catch (err) {
-                console.log(err);
-            }
-        }
+        <!--Generate a new Smart Contract transaction -->
+        <div>
+            <h3>Generate New Contract transactions</h3>
+            <form id="submitTX">
+                Enter "From Address":
+                
+                <input type="text" id="fromAddr" name="fromAddr" placeholder="ex:0x34f6219c4eCF5Be925cdfEc212698D51Fc7D73e9">
+                 <br>
 
-        myAccounts=getMyAccounts();
+                <br> Enter "To Address", amount:
+                <br>
+                <input type="text" id="txContract" name="txContract" placeholder="ex:0x34f6219c4eCF5Be925cdfEc212698D51Fc7D73e9,50">
+                 <br>
+                <input type="button" class="button" value="Submit Transaction" onclick="transact()">
+            </form>
+        </div>
+
+        <br>
+        <div>
+        <!--List incoming Smart Contract transactions-->
+            <h3>Monitor New Contract transactions</h3>
+            <div id="myContractEventsList">                
+              <!-- empty -->
+            </div>
+        </div>
+
+        <!--Get Token balance of the address, enter address in hex-->
+        <br>
+        <div>
+        <h3>Get Token Balance</h3>
+        <form id="getFrom">
+                Enter "Address":
+                
+                <input type="text" id="fromAddr2" name="fromAddr2" placeholder="ex:0x34f6219c4eCF5Be925cdfEc212698D51Fc7D73e9">
+                 <br>
+
+            </form>
+        <button class="button" onclick="getTokenBalance()">Get Token balance</button>
+
+        <br>
+        <div id="accountBalance">                
+          <!-- empty -->
+        </div>
+        </div>
+        <br>
+
+        <div id="makeTX">                
+          <!-- empty -->
+        </div>
+        <br>
+
+        <button class="button" onclick="printAllAccounts()">Get All Accounts</button>
+
+        <div id="myAccountList">
+            <!-- empty -->
+        </div>
+
+        <br>
+        <button class="button" onclick="getAllBlocks()">Get all blocks</button>
+
+        <div id="myBlockList">                
+            <!-- empty -->
+        </div>
 
 
-        function printAllAccounts(){
-            parentElement = document.getElementById('accounts');
 
-            for (var k in myAccounts){
-                    if (typeof myAccounts[k] !== 'function') {
-                         console.log("Key is " + k + ", value is" + myAccounts[k]);
+    </body>
 
-                            childElement = document.createElement('div');
-                          appendChildElement = parentElement.appendChild(childElement);
-                          appendChildElement.innerHTML = k.toString()+ ":"+myAccounts[k].toString();
-
-                    }
-                }
-        }
-
-
-        function getBalance() {
-
-            web3.eth.getBalance(myAccounts[0], function(error, balance) {
-                //console.log("add is",add);
-                document.getElementById("myBalance").innerText = web3.utils.fromWei(balance, "ether");                
-            });
-        }
-    //python -m http.server 8081//
-    </script>
-
-
-</head>
-<body>
-<h1>This is my balance</h1> <span id="myBalance"></span> Ether
-<br>
-<br>
-<button onclick="getBalance()">Update my balance</button>
-<br>
-<br>
-<button onclick="printAllAccounts()">List all accounts</button>
-<div id="accounts">                
-  <!-- empty -->
-</div>
-</body>
 </html>
