@@ -1,1 +1,1 @@
-# DappsUni ethereum-dapp-jenkins
+# ethereum-dapp-jenkins
