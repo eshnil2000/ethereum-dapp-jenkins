@@ -15,24 +15,44 @@
     <body>
         <div id="headerlogo" class="header">
             <img src="logo.png" alt="logo" />
-            <h1>My DappsUni Smart Contract Dashboard</h1>
+            <h1>DappsUni ICO Dashboard</h1>
         </div>
         <hr>
         <br>
-        <!--Input your Ethereum Node IP address or domain name-->
-        
-            <h3 id='instructions'>Before you begin: Set your Ethereum Node!!</h3>
-            <div id='instructions'>
-            <pre><code>
-                //In file main.js, change myDappsUniEthereumNode to your domain
-                var myDappsUniEthereumNode= "nik.chainapp.live:7852";
-            </code></pre>
+
+        <br>
+
+        <div>
+            <h3 id="ICO_status">ICO Progress</h3>
+            <div id="progressbar">
+              <div id="colorbar"></div>
             </div>
+        </div>
+    
+            <br>
+            <!--button class="button" onclick="move()">Progress</button-->
+        </div>
+        <br>
+
+                <!--Input Smart Contract address in Hex-->
+        <div>
+            <h3>Purchase ICO</h3>
+            <form id="purchaseICO">
+                <br> Enter your address:
+                <br>
+                <input type="text" id="purchaseICOfromaddress" name="purchaseICOfromaddress" placeholder="ex: 0x1f8658dFb19a59d719951C00155fa894a78051e8134140f6">
+                 <br>
+                <input type="button" class="button" value="Submit your Address" onclick="purchaseICO()">
+            </form>
+
+          <div id="currentContract">                
+          <!-- empty -->
+        </div>
         </div>
         <br>
         <!--Input Smart Contract address in Hex-->
         <div>
-            <h3>Find Smart Contract</h3>
+            <h3> ICO Smart Contract Address</h3>
             <form id="queryContractForm">
                 <br> Enter Contract address:
                 <br>

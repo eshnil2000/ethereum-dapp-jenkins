@@ -1,3 +1,18 @@
+ #progressbar {
+      background-color: black;
+      border-radius: 13px; /* (height of inner div) / 2 + padding */
+      padding: 3px;
+    }
+    
+    #colorbar  {
+    /*#progressbar > div {*/
+       background-color: orange;
+       width: 0%; /* Adjust with JavaScript */
+       height: 10px;
+       border-radius: 10px;
+       text-align: right;
+    }
+
 #instructions {
     background-color: red;
 }
