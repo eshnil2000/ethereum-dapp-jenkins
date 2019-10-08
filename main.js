@@ -447,7 +447,7 @@
         function getcontract(){
             var myContractEventsList= document.getElementById("myContractEventsList");
             contractAddress=document.getElementById('queryContract').value;
-            currentContract.innerHTML='';
+            
             TokenContract = new web3ws.eth.Contract(abi,contractAddress);
             console.log(TokenContract);
             var transferEvent= TokenContract.events.Transfer((err, events)=>{
@@ -460,6 +460,7 @@
 
             var currentContract= document.getElementById("currentContract");
             var textnode2 = document.createTextNode("Now monitoring contract @ address: "+ contractAddress);
+            currentContract.innerHTML='';
             currentContract.appendChild(textnode2);
             TokenContract.methods.hardCap().call((err, result) => {
                 console.log('hardCap is: ', result);
