@@ -447,6 +447,7 @@
         function getcontract(){
             var myContractEventsList= document.getElementById("myContractEventsList");
             contractAddress=document.getElementById('queryContract').value;
+            currentContract.innerHTML='';
             TokenContract = new web3ws.eth.Contract(abi,contractAddress);
             console.log(TokenContract);
             var transferEvent= TokenContract.events.Transfer((err, events)=>{
