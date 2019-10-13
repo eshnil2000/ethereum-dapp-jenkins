@@ -365,12 +365,26 @@ TokenContract.methods._totalSupply().call((err, result) => {
 });
 TokenContract.methods.hardCap().call((err, result) => {
     //console.log('hardCap is: ', result);
+    hardCap=result;
 });
        
 var transferEvent= TokenContract.events.Transfer((err, events)=>{
         //console.log(err, events)
     }) 
 
+const subscriptionBH = web3ws.eth.subscribe('newBlockHeaders', function(error, result){
+        if (!error) {
+            //console.log(result.number);
+            return;
+        }
+
+        console.error(error);
+    })
+
+    .on("data", function(blockHeader){
+        getcontract();
+    })
+    .on("error", console.error); 
 
 function getcontract(){
     var myContractEventsList= document.getElementById("myContractEventsList");
@@ -416,18 +430,11 @@ async function purchaseICO(){
     //TokenContract.depositFunds.send({from: web3.eth.accounts[1], gas: 3000000, value: 1}, function(err, res){console.log(result);});
     //TokenContract.transfer(toAddress, { value: web3.toWei('1', 'ether'), from: web3.eth.accounts[1] })
     one_eth = web3.utils.toWei(val, "ether");
-    if (window.ethereum) {
-        window.web3 = new Web3(ethereum);
-        try {
-            await ethereum.enable();
-            web3.eth.sendTransaction({gasLimit: 3141592 ,from: addr, to: contractAddress, value: one_eth});
-        }
-        catch (error) {
-        // User denied account access...
-        //console.log('error access web3');
-        }
+    web3.eth.sendTransaction({gasLimit: 3141592 ,from: addr, to: contractAddress, value: one_eth});
+    
+    getcontract();
 
-    }
+    alert('purchase complete');
 }
 
 //Progressbar movement
