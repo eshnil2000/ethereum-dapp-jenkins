@@ -388,7 +388,7 @@ function getcontract(){
 //==Accept Ether, give back tokens==//
  function purchaseICO(){
     var tx= document.getElementById('purchaseICOfromaddress').value;
-    console.log(tx);
+    //console.log(tx);
     var addr=tx.split(",")[0];
     var val=tx.split(",")[1];
     var fromAddr= document.getElementById('purchaseICOfromaddress').value;
@@ -399,7 +399,7 @@ function getcontract(){
 
 //==Progressbar movement==//
 function move(hardCap,totalSupply) {
-  console.log("move called with hardcap:",hardCap, " total: ", totalSupply);
+  //console.log("move called with hardcap:",hardCap, " total: ", totalSupply);
   var elem = document.getElementById("colorbar");   
   var width = 1;
   var id = setInterval(frame, 10);
